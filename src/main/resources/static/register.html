@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Calendar | Register</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #4361ee;
+      --secondary-color: #3f37c9;
+      --accent-color: #4cc9f0;
+      --success-color: #4ad66d;
+      --error-color: #f72585;
+      --text-dark: #2b2d42;
+      --text-light: #8d99ae;
+      --bg-light: #f8f9fa;
+      --border-color: #e9ecef;
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-light);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-image: radial-gradient(circle at 10% 20%, rgba(91, 173, 254, 0.1) 0%, rgba(245, 245, 245, 1) 90%);
+      color: var(--text-dark);
+    }
+
+    .register-container {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(67, 97, 238, 0.15);
+      width: 100%;
+      max-width: 450px;
+      margin: 1rem;
+      transform: translateY(0);
+      transition: var(--transition);
+    }
+
+    .register-container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(67, 97, 238, 0.2);
+    }
+
+    .register-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .register-header h1 {
+      color: var(--text-dark);
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .register-header p {
+      color: var(--text-light);
+      font-size: 0.95rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--text-dark);
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: var(--transition);
+      background-color: rgba(233, 236, 239, 0.1);
+    }
+
+    .form-group input:focus {
+      border-color: var(--primary-color);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+    }
+
+    .form-group .input-icon {
+      position: absolute;
+      right: 1rem;
+      top: 2.6rem;
+      color: var(--text-light);
+    }
+
+    .name-fields {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .name-fields .form-group {
+      flex: 1;
+    }
+
+    .terms {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .terms input {
+      margin-right: 0.7rem;
+      margin-top: 0.2rem;
+      accent-color: var(--primary-color);
+    }
+
+    .terms label {
+      color: var(--text-light);
+      text-align: left;
+    }
+
+    .terms a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .terms a:hover {
+      color: var(--secondary-color);
+      text-decoration: underline;
+    }
+
+    .register-btn {
+      width: 100%;
+      padding: 0.9rem;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 4px 12px rgba(67, 97, 238, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .register-btn:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(67, 97, 238, 0.3);
+    }
+
+    .register-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 1.5rem;
+      color: var(--text-light);
+      font-size: 0.95rem;
+    }
+
+    .login-link a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .login-link a:hover {
+      color: var(--secondary-color);
+      text-decoration: underline;
+    }
+
+    .password-strength {
+      margin-top: 0.5rem;
+      height: 4px;
+      background-color: var(--border-color);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .password-strength-bar {
+      height: 100%;
+      width: 0%;
+      background-color: var(--error-color);
+      transition: var(--transition);
+    }
+
+    @media (max-width: 480px) {
+      .register-container {
+        padding: 1.5rem;
+      }
+
+      .register-header h1 {
+        font-size: 1.5rem;
+      }
+
+      .name-fields {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="register-container">
+  <div class="register-header">
+    <h1>Create Your Account</h1>
+    <p>Join Smart Calendar to organize your life</p>
+  </div>
+
+  <form id="registerForm">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" placeholder="Enter your username" required>
+      <span class="input-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M20.5899 22C20.5899 18.13 16.7399 15 11.9999 15C7.25991 15 3.40991 18.13 3.40991 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" placeholder="Enter your email" required>
+      <span class="input-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Create a password" required oninput="checkPasswordStrength()">
+      <span class="input-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M19.4 15C19.2669 15.3016 19.1339 15.6031 19 15.9037C18.394 17.1645 17.4884 18.2694 16.3583 19.1287C15.2282 19.9881 13.9075 20.5758 12.505 20.842C11.1025 21.1083 9.65863 21.0452 8.29401 20.6589C6.92938 20.2726 5.68581 19.5758 4.67164 18.6299C3.65746 17.684 2.90298 16.5169 2.46999 15.224C2.03699 13.9311 1.93785 12.5514 2.18085 11.2113C2.42385 9.87117 3.00124 8.61293 3.85999 7.54798M7.09999 4.51998C7.97598 4.16962 8.91105 3.99738 9.853 4.01398C10.7949 4.03058 11.7225 4.23551 12.581 4.616C13.4394 4.99649 14.2107 5.54391 14.85 6.22498C15.4893 6.90605 15.9825 7.70595 16.3 8.57598M3 3L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <div class="password-strength">
+        <div class="password-strength-bar" id="passwordStrengthBar"></div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="confirm-password">Confirm Password</label>
+      <input type="password" id="confirm-password" placeholder="Confirm your password" required>
+      <span class="input-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 12V14C16 15.1046 15.1046 16 14 16H10C8.89543 16 8 15.1046 8 14V12M12 12V8M12 8H15M12 8H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 15V17M12 21C7.58172 21 4 17.4183 4 13V10C4 5.58172 7.58172 2 12 2C16.4183 2 20 5.58172 20 10V13C20 14.6569 19 16 17 16H12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+    </div>
+
+    <div class="terms">
+      <input type="checkbox" id="terms" required>
+      <label for="terms">
+        I agree to the <a href="terms.html">Terms of Service</a> and
+        <a href="privacy.html">Privacy Policy</a>. I understand that my data will be
+        processed in accordance with Smart Calendar's policies.
+      </label>
+    </div>
+
+    <button type="submit" class="register-btn">
+      <svg viewBox="0 0 24 24">
+        <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Create Account
+    </button>
+
+    <div class="login-link">
+      Already have an account? <a href="login.html">Sign in</a>
+    </div>
+  </form>
+</div>
+
+<script>
+  document.querySelector("form").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const data = {
+      username: document.getElementById("username").value.trim(),
+      email: document.getElementById("email").value.trim(),
+      password: document.getElementById("password").value,
+      confirmPassword: document.getElementById("confirm-password").value
+    };
+
+    if (data.password !== data.confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(data.email)) {
+      alert("Please enter a valid email address");
+      return;
+    }
+
+
+    const response = await fetch("http://localhost:8080/api/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+
+    if (response.ok) {
+      alert("Registered successfully !");
+      window.location.href = "login.html";
+    }
+    else {
+      const errorText = await response.text();
+      alert("Registration Failed: " + errorText);
+    }
+  });
+</script>
+</body>
+</html>
+
