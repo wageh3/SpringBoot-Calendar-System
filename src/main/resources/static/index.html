@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Calendar | Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+<!-- Mobile Menu Button -->
+<button class="mobile-menu-btn" id="menuToggle">
+  <i class="fas fa-bars"></i>
+</button>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <img src="https://cdn-icons-png.flaticon.com/512/3652/3652191.png" alt="Smart Calendar Logo">
+    <h2>Smart Calendar</h2>
+  </div>
+
+  <ul class="nav-menu">
+    <li class="nav-item">
+      <a href="#" class="nav-link active">
+        <i class="fas fa-calendar-alt"></i>
+        <span>Calendar</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link">
+        <i class="fas fa-list-ul"></i>
+        <span>Upcoming Events</span>
+      </a>
+    </li>
+  </ul>
+
+  <div class="nav-menu">
+    <div class="nav-item">
+      <a href="#" class="nav-link">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Logout</span>
+      </a>
+    </div>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+  <header class="header">
+    <h1>My Calendar</h1>
+
+    <div class="user-profile">
+      <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User Profile">
+      <div class="user-info">
+        <h4>UserName</h4>
+      </div>
+    </div>
+  </header>
+
+  <!-- Calendar View -->
+  <section class="calendar-view">
+    <div class="calendar-header">
+      <h3 class="calendar-title">October 2023</h3>
+
+      <div class="calendar-actions">
+        <div class="view-switcher">
+          <button class="view-btn active">Month</button>
+          <button class="view-btn">Day</button>
+        </div>
+
+        <div class="month-navigation">
+          <button class="nav-btn">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <span class="current-month">October 2023</span>
+          <button class="nav-btn">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+
+        <button class="action-btn btn-primary" id="addEventBtn">
+          <i class="fas fa-plus"></i> Add Event
+        </button>
+      </div>
+    </div>
+
+    <!-- Monthly Calendar Grid -->
+    <div class="month-grid">
+      <!-- Day Headers -->
+      <div class="day-header">Sun</div>
+      <div class="day-header">Mon</div>
+      <div class="day-header">Tue</div>
+      <div class="day-header">Wed</div>
+      <div class="day-header">Thu</div>
+      <div class="day-header">Fri</div>
+      <div class="day-header">Sat</div>
+
+      <!-- Calendar Cells -->
+      <!-- Previous Month Days -->
+      <div class="day-cell inactive">
+        <div class="day-number">25</div>
+      </div>
+      <div class="day-cell inactive">
+        <div class="day-number">26</div>
+      </div>
+      <div class="day-cell inactive">
+        <div class="day-number">27</div>
+      </div>
+      <div class="day-cell inactive">
+        <div class="day-number">28</div>
+      </div>
+      <div class="day-cell inactive">
+        <div class="day-number">29</div>
+      </div>
+      <div class="day-cell inactive">
+        <div class="day-number">30</div>
+      </div>
+      <div class="day-cell">
+        <div class="day-number">1</div>
+        <div class="event-item">Team Meeting</div>
+      </div>
+
+      <!-- Current Month Days -->
+      <div class="day-cell">
+        <div class="day-number">2</div>
+      </div>
+      <div class="day-cell">
+        <div class="day-number">3</div>
+        <div class="event-item reminder">Assignment Due</div>
+      </div>
+      <div class="day-cell">
+        <div class="day-number">4</div>
+      </div>
+      <div class="day-cell">
+        <div class="day-number">5</div>
+      </div>
+      <div class="day-cell">
+        <div class="day-number">6</div>
+        <div class="event-item">Doctor Appointment</div>
+      </div>
+      <div class="day-cell">
+        <div class="day-number">7</div>
+        <div class="event-item invitation">Birthday Party</div>
+      </div>
+      <div class="day-cell">
+        <div class="day-number">8</div>
+      </div>
+
+      <div class="day-cell">
+        <div class="day-number">9</div>
+      </div>
+      <div class="day-cell">
+        <div class="day-number">10</div>
+      </div>
+      <div class="day-cell">
+        <div class="day-number">11</div>
+        <div class="event-item">Study Group</div>
+      </div>
+      <div class="day-cell">
+        <div class="day-number">12</div>
+      </div>
+      <div class="day-cell">
+        <div class="day-number">13</div>
+      </div>
+      <div class="day-cell">
+        <div class="day-number">14</div>
+        <div class="event-item reminder">Project Deadline</div>
+      </div>
+      <div class="day-cell">
+        <div class="day-number">15</div>
+      </div>
+
+      <div class="day-cell">
+        <div class="day-number">16</div>
+      </div>
+      <div class="day-cell today">
+        <div class="day-number">17</div>
+        <div class="event-item">Lunch with Mark</div>
+        <div class="event-item invitation">Team Building</div>
+      </div>
+      <div class="day-cell">
+        <div class="day-number">18</div>
+      </div>
+      <div class="day-cell">
+        <div class="day-number">19</div>
+      </div>
+      <div class="day-cell">
+        <div class="day-number">20</div>
+      </div>
+      <div class="day-cell">
+        <div class="day-number">21</div>
+      </div>
+      <div class="day-cell">
+        <div class="day-number">22</div>
+      </div>
+
+      <div class="day-cell">
+        <div class="day-number">23</div>
+      </div>
+      <div class="day-cell">
+        <div class="day-number">24</div>
+        <div class="event-item">Conference Call</div>
+      </div>
+      <div class="day-cell">
+        <div class="day-number">25</div>
+      </div>
+      <div class="day-cell">
+        <div class="day-number">26</div>
+      </div>
+      <div class="day-cell">
+        <div class="day-number">27</div>
+        <div class="event-item reminder">Pay Rent</div>
+      </div>
+      <div class="day-cell">
+        <div class="day-number">28</div>
+      </div>
+      <div class="day-cell">
+        <div class="day-number">29</div>
+      </div>
+
+      <div class="day-cell">
+        <div class="day-number">30</div>
+      </div>
+      <div class="day-cell">
+        <div class="day-number">31</div>
+        <div class="event-item">Halloween Party</div>
+      </div>
+      <!-- Next Month Days -->
+      <div class="day-cell inactive">
+        <div class="day-number">1</div>
+      </div>
+      <div class="day-cell inactive">
+        <div class="day-number">2</div>
+      </div>
+      <div class="day-cell inactive">
+        <div class="day-number">3</div>
+      </div>
+      <div class="day-cell inactive">
+        <div class="day-number">4</div>
+      </div>
+      <div class="day-cell inactive">
+        <div class="day-number">5</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Event Modal -->
+<div class="modal-overlay" id="eventModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 class="modal-title">Add New Event</h3>
+      <button class="modal-close" id="closeModal">&times;</button>
+    </div>
+
+    <div class="modal-body">
+      <form id="eventForm">
+        <div class="form-group">
+          <label for="eventTitle">Event Title</label>
+          <input type="text" id="eventTitle" class="form-control" placeholder="Enter event title" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="eventDate">Date</label>
+            <input type="date" id="eventDate" class="form-control" required>
+          </div>
+
+          <div class="form-group">
+            <label for="eventTime">Time</label>
+            <input type="time" id="eventTime" class="form-control" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="eventDescription">Description</label>
+          <textarea id="eventDescription" class="form-control" rows="3" placeholder="Enter event description"></textarea>
+        </div>
+      </form>
+    </div>
+
+    <div class="modal-footer">
+      <button class="action-btn btn-outline" id="cancelEvent">Cancel</button>
+      <button class="action-btn btn-primary" id="saveEvent">Save Event</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Mobile Menu Toggle
+  const menuToggle = document.getElementById('menuToggle');
+  const sidebar = document.getElementById('sidebar');
+
+  menuToggle.addEventListener('click', () => {
+    sidebar.classList.toggle('active');
+  });
+
+  // Event Modal Toggle
+  const addEventBtn = document.getElementById('addEventBtn');
+  const eventModal = document.getElementById('eventModal');
+  const closeModal = document.getElementById('closeModal');
+  const cancelEvent = document.getElementById('cancelEvent');
+
+  addEventBtn.addEventListener('click', () => {
+    eventModal.classList.add('active');
+  });
+
+  closeModal.addEventListener('click', () => {
+    eventModal.classList.remove('active');
+  });
+
+  cancelEvent.addEventListener('click', () => {
+    eventModal.classList.remove('active');
+  });
+
+  const saveEvent = document.getElementById('saveEvent');
+  const eventForm = document.getElementById('eventForm');
+
+  saveEvent.addEventListener('click', async (e) => {
+    e.preventDefault();
+
+    const title = document.getElementById('eventTitle').value;
+    const date = document.getElementById('eventDate').value;
+    const time = document.getElementById('eventTime').value;
+    const description = document.getElementById('eventDescription').value;
+
+    const eventData = {
+      title: title,
+      date: date,
+      time: time,
+      description: description
+    };
+
+    try {
+      const response = await fetch("http://localhost:8080/api/Add_Event", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(eventData)
+      });
+
+      if (response.ok) {
+        const resultText = await response.text();
+        if (resultText === "SUCCESS") {
+          alert('Event saved successfully!');
+          eventModal.classList.remove('active');
+          eventForm.reset();
+        }
+        else {
+          alert('Failed to save event.');
+        }
+      }
+    }
+    catch (error) {
+      console.error('Error:', error);
+      alert('Error saving event.');
+    }
+  });
+
+
+
+  // Set today's date as default in the form
+  document.getElementById('eventDate').valueAsDate = new Date();
+</script>
+</body>
+</html>
