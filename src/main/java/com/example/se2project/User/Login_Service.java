@@ -1,10 +1,11 @@
 package com.example.se2project.User;
-
 import com.example.se2project.Entities.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.util.Optional;
 
@@ -16,13 +17,19 @@ public class Login_Service {
         this.login_repo = login_repo;
     }
 
-    public ResponseEntity<String> login(@RequestBody User user) {
+    public ResponseEntity<String> login(@RequestBody User user, HttpServletResponse response) {
         Optional<User> result = login_repo.findByEmail(user.getEmail());
 
         if (result.isPresent()) {
             User getted_user = result.get();
-            if (getted_user.getPassword().equals(user.getPassword()))
+            if (getted_user.getPassword().equals(user.getPassword())){
+                Cookie userIdCookie = new Cookie("userId", getted_user.getId().toString());
+                userIdCookie.setPath("/");
+                userIdCookie.setHttpOnly(true);
+                userIdCookie.setMaxAge(24 * 60 * 60);
+                response.addCookie(userIdCookie);
                 return ResponseEntity.ok("SUCCESS");
+            }
             else
                 return ResponseEntity.ok("WRONG PASSWORD");
         }

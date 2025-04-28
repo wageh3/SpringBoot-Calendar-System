@@ -4,6 +4,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import java.util.Optional;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/api")
@@ -15,8 +17,8 @@ public class Login_Controller {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> loginUser(@RequestBody User user) {
-        ResponseEntity<String> result =login_service.login(user);
+    public ResponseEntity<String> loginUser(@RequestBody User user, HttpServletResponse response) {
+        ResponseEntity<String> result =login_service.login(user,response);
         return result;
     }
 
