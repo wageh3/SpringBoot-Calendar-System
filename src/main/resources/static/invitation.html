@@ -157,6 +157,40 @@
     }
 
 
+
+    document.addEventListener('click', async function(event) {
+        if (event.target.closest('.accept-btn')) {
+            const button = event.target.closest('.accept-btn');
+            const invitationId = button.getAttribute('data-id');
+
+            try {
+                const response = await fetch(`http://localhost:8080/api/Accept_Invitation/${invitationId}`, {
+                    method: 'POST',
+                    credentials: 'include'
+                });
+
+
+                if (response.ok) {
+                    const resultText = await response.text();
+                    if (resultText === "Accepted") {
+                        alert('Invitation Accepted Successfully!');
+                        loadReceivedInvitations();
+                    }
+                    else
+                        alert('Failed to accept invitation');
+                }
+            }
+            catch (error) {
+                console.error('Error accepting invitation:', error);
+                alert('An error occurred');
+            }
+        }
+    });
+
+
+
+
+
     function getStatusIcon(status) {
         switch(status) {
             case 'pending': return 'fas fa-clock';

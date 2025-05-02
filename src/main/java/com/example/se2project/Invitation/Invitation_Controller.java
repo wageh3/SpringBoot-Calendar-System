@@ -4,7 +4,6 @@ import com.example.se2project.Event.Event_Repo;
 import com.example.se2project.User.User_Repo;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -69,24 +68,23 @@ public class Invitation_Controller {
         List<InvitationDTO> invitationsDTO = invitation_Repo.findInvitationsByReceiverId(Integer.parseInt(userId));
         List<InvitationReceiver_DTO> invitations = new ArrayList<>();
         invitationsDTO.forEach(invitationdto -> {
-            Optional<User> userOptional = user_repo.findById(invitationdto.getSender_id());
-            User Sender = userOptional.get();
-            Event event = event_Repo.findEventById(invitationdto.getEvent_id());
-            InvitationReceiver_DTO invitation = new InvitationReceiver_DTO(
-                    invitationdto.getInvitation_id(),
-                    Sender.getUsername(),
-                    Sender.getEmail(),
-                    event.getTitle(),
-                    event.getDate(),
-                    event.getTime()
-            );
-            invitations.add(invitation);
+            if(invitationdto.getStatus().equals("pending")) {
+                Optional<User> userOptional = user_repo.findById(invitationdto.getSender_id());
+                User Sender = userOptional.get();
+                Event event = event_Repo.findEventById(invitationdto.getEvent_id());
+                InvitationReceiver_DTO invitation = new InvitationReceiver_DTO(
+                        invitationdto.getInvitation_id(),
+                        Sender.getUsername(),
+                        Sender.getEmail(),
+                        event.getTitle(),
+                        event.getDate(),
+                        event.getTime()
+                );
+                invitations.add(invitation);
+            }
         });
         return ResponseEntity.ok(invitations);
     }
-
-
-
 
 
 

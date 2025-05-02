@@ -1,5 +1,4 @@
 package com.example.se2project.Invitation;
-import com.example.se2project.Entities.EventDTO;
 import com.example.se2project.Entities.Invitation;
 import com.example.se2project.Entities.InvitationDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -7,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface Invitation_Repo extends JpaRepository<Invitation,Integer> {
@@ -20,6 +20,7 @@ public interface Invitation_Repo extends JpaRepository<Invitation,Integer> {
             "FROM Invitation e WHERE e.receiver.id = :userId")
     List<InvitationDTO> findInvitationsByReceiverId(@Param("userId") Integer userId);
 
+    Optional<Invitation> findById(Integer id);
 
 }
 
