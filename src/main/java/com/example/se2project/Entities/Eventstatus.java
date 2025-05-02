@@ -1,14 +1,16 @@
 package com.example.se2project.Entities;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "eventstatus")
 public class Eventstatus {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "eventstatus_id", nullable = false)
     private Integer id;
 
@@ -16,6 +18,7 @@ public class Eventstatus {
     private String status;
 
     @OneToMany(mappedBy = "eventstatus")
+    @JsonIgnore
     private Set<Event> events = new LinkedHashSet<>();
 
     public Integer getId() {

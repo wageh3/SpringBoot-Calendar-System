@@ -31,16 +31,22 @@
       </a>
     </li>
     <li class="nav-item">
-      <a href="#" class="nav-link">
+      <a href="event.html" class="nav-link" id="upcomingEventsLink">
         <i class="fas fa-list-ul"></i>
         <span>Upcoming Events</span>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="invitation.html" class="nav-link" id="invitation">
+        <i class="fas fa-list-ul"></i>
+        <span>Invitation</span>
       </a>
     </li>
   </ul>
 
   <div class="nav-menu">
     <div class="nav-item">
-      <a href="#" class="nav-link">
+      <a href="#" class="nav-link" id="logoutBtn">
         <i class="fas fa-sign-out-alt"></i>
         <span>Logout</span>
       </a>
@@ -56,7 +62,7 @@
     <div class="user-profile">
       <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User Profile">
       <div class="user-info">
-        <h4>UserName</h4>
+        <h4 id="usernameDisplay"></h4>
       </div>
     </div>
   </header>
@@ -363,6 +369,40 @@
   });
 
 
+  const logoutBtn = document.getElementById('logoutBtn');
+  logoutBtn.addEventListener('click', async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("http://localhost:8080/api/logout", {
+        method: 'POST',
+        credentials: 'include',
+      });
+
+      if (response.ok) {
+        alert('Logged out successfully!');
+        window.location.href = "login.html";
+      }
+      else {
+        alert('Failed to logout.');
+      }
+    }
+    catch (error) {
+      console.error('Logout error:', error);
+      alert('An error occurred during logout.');
+    }
+  });
+
+
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const username = getCookie('userName');
+    document.getElementById('usernameDisplay').textContent = username;
+  });
 
   // Set today's date as default in the form
   document.getElementById('eventDate').valueAsDate = new Date();

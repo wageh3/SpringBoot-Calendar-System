@@ -1,5 +1,8 @@
 package com.example.se2project.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -8,6 +11,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "event")
 public class Event {
     @Id
@@ -29,22 +33,27 @@ public class Event {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "eventstatus_id", nullable = false)
+    @JsonIgnore
     private Eventstatus eventstatus;
 
     @ManyToMany
     @JoinTable(name = "event_reminder",
             joinColumns = @JoinColumn(name = "event_id"),
             inverseJoinColumns = @JoinColumn(name = "reminder_id"))
+    @JsonIgnore
     private Set<Reminder> reminders = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "event")
+    @JsonIgnore
     private Set<Invitation> invitations = new LinkedHashSet<>();
 
     @ManyToMany
+    @JsonIgnore
     @JoinTable(name = "participation",
             joinColumns = @JoinColumn(name = "event_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))

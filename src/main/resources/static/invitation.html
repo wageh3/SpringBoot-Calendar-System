@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Calendar | Upcoming Events</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="invitation.css">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+<!-- Mobile Menu Button -->
+<button class="mobile-menu-btn" id="menuToggle">
+    <i class="fas fa-bars"></i>
+</button>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <img src="https://cdn-icons-png.flaticon.com/512/3652/3652191.png" alt="Smart Calendar Logo">
+        <h2>Smart Calendar</h2>
+    </div>
+
+    <ul class="nav-menu">
+        <li class="nav-item">
+            <a href="index.html" class="nav-link">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Calendar</span>
+            </a>
+        </li>
+    </ul>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+    <header class="header">
+        <h1>Invitations</h1>
+        <div class="user-profile">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User Profile">
+            <div class="user-info">
+                <h4 id="usernameDisplay"></h4>
+            </div>
+        </div>
+    </header>
+
+    <div class="invitation-sections">
+        <!-- Invitation Sended Section -->
+        <section class="invitation-section">
+            <h2>Invitation Sended</h2>
+            <div id="sendedInvitations" class="invitations-list">
+                <!-- Invitations will be loaded here from API -->
+            </div>
+        </section>
+
+        <!-- Invitation Received Section -->
+        <section class="invitation-section">
+            <h2>Invitation Received</h2>
+            <div id="receivedInvitations" class="invitations-list">
+
+            </div>
+        </section>
+    </div>
+</main>
+
+<script>
+    // Function to fetch and display sent invitations
+    async function loadSendedInvitations() {
+        try {
+            const response = await fetch("http://localhost:8080/api/Get_All_InvitationsSended", {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include'
+            });
+            const invitationsSended = await response.json();
+            const container = document.getElementById('sendedInvitations');
+
+            if (invitationsSended.length === 0) {
+                container.innerHTML = '<p class="empty-message">No sent invitations</p>';
+                return;
+            }
+
+            let html = '';
+            invitationsSended.forEach(invitation => {
+                html += `
+    <div class="invitation-card">
+        <h3>${invitation.receiver_name}</h3>
+        <p><i class="fas fa-envelope"></i> ${invitation.receiver_email}</p>
+        <p><i class="fas fa-calendar-check"></i> ${invitation.event_title}</p>
+        <div class="status ${invitation.status}">
+            <i class="status-icon ${getStatusIcon(invitation.status)}"></i>
+            ${formatStatus(invitation.status)}
+        </div>
+    </div>
+`;
+
+            });
+
+            container.innerHTML = html;
+        } catch (error) {
+            console.error('Error loading invitations:', error);
+            document.getElementById('sendedInvitations').innerHTML =
+                '<p class="error-message">Failed to load invitations</p>';
+        }
+    }
+
+
+
+    async function loadReceivedInvitations() {
+        try {
+            const response = await fetch("http://localhost:8080/api/Get_All_InvitationsRecevied", {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include'
+            });
+            const invitationsReceived = await response.json();
+            const container = document.getElementById('receivedInvitations');
+
+            if (invitationsReceived.length === 0) {
+                container.innerHTML = '<p class="empty-message">No received invitations</p>';
+                return;
+            }
+
+            let html = '';
+            invitationsReceived.forEach(invitation => {
+                html += `
+<div class="invitation-card received">
+    <h3>${invitation.sender_name}</h3>
+    <p><i class="fas fa-envelope"></i> ${invitation.sender_email}</p>
+    <p><i class="fas fa-calendar-check"></i> ${invitation.event_title}</p>
+    <p><i class="fas fa-calendar-day"></i> <strong>Date:</strong> ${invitation.event_date}</p>
+    <p><i class="fas fa-clock"></i> <strong>Time:</strong> ${invitation.event_time}</p>
+    <div class="invitation-actions">
+        <button class="accept-btn" data-id="${invitation.invitationReceived_id}">
+            <i class="fas fa-check"></i> Accept
+        </button>
+        <button class="decline-btn" data-id="${invitation.invitationReceived_id}">
+            <i class="fas fa-times"></i> Decline
+        </button>
+    </div>
+</div>
+`;
+            });
+
+            container.innerHTML = html;
+        } catch (error) {
+            console.error('Error loading invitations:', error);
+            document.getElementById('receivedInvitations').innerHTML =
+                '<p class="error-message">Failed to load invitations</p>';
+        }
+    }
+
+
+    function getStatusIcon(status) {
+        switch(status) {
+            case 'pending': return 'fas fa-clock';
+            case 'accepted': return 'fas fa-check-circle';
+            case 'rejected': return 'fas fa-times-circle';
+            default: return 'fas fa-question-circle';
+        }
+    }
+
+    function formatStatus(status) {
+        switch(status) {
+            case 'pending': return 'Pending';
+            case 'accepted': return 'Accepted';
+            case 'rejected': return 'Rejected';
+            default: return status;
+        }
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        loadSendedInvitations();
+        loadReceivedInvitations();
+    });
+</script>
+</body>
+</html>

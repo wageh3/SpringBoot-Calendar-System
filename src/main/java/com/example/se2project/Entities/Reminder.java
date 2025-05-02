@@ -1,5 +1,6 @@
 package com.example.se2project.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.LinkedHashSet;
@@ -16,6 +17,7 @@ public class Reminder {
     private Integer time;
 
     @ManyToMany(mappedBy = "reminders")
+    @JsonIgnore
     private Set<Event> events = new LinkedHashSet<>();
 
     public Integer getId() {

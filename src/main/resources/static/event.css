@@ -1,0 +1,320 @@
+/* تحسينات بطاقات الأحداث */
+.event-card {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border: none;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.12);
+}
+
+.event-card-body {
+    padding: 1.5rem;
+    position: relative;
+}
+
+.event-header h3 {
+    margin: 0 0 1rem 0;
+    color: #2c3e50;
+    font-size: 1.3rem;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.event-header h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, #3498db, #2ecc71);
+    border-radius: 3px;
+}
+
+.event-details {
+    margin-top: 1.5rem;
+}
+
+.event-details p {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.event-details i {
+    color: #3498db;
+    width: 20px;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.event-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid #f0f0f0;
+}
+
+.edit-btn, .delete-btn {
+    padding: 0.5rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.edit-btn {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #27ae60;
+    transform: translateY(-2px);
+}
+
+.delete-btn {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+}
+
+/* تأثيرات إضافية */
+.event-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, #3498db, #2ecc71);
+}
+
+/* تكيف مع الشاشات الصغيرة */
+@media (max-width: 768px) {
+    .event-card {
+        margin-bottom: 1.5rem;
+    }
+
+    .event-actions {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .edit-btn, .delete-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+.event-actions .edit-btn i,
+.event-actions .delete-btn i {
+    color: black;
+}
+
+/* Edit Form Styles */
+.edit-form {
+    padding: 20px;
+    background: white;
+}
+
+.edit-form .form-group {
+    margin-bottom: 15px;
+}
+
+.edit-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.edit-form input[type="text"],
+.edit-form input[type="date"],
+.edit-form input[type="time"],
+.edit-form textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.edit-form .form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.edit-form .form-row .form-group {
+    flex: 1;
+}
+
+.edit-form .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.edit-form .save-btn,
+.edit-form .cancel-btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.edit-form .save-btn {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.edit-form .cancel-btn {
+    background-color: #e74c3c;
+    color: white;
+}
+
+/* زر Invite */
+.invite-btn {
+    padding: 0.5rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    background-color: #3498db;
+    color: white;
+}
+
+.invite-btn:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+.invite-btn i {
+    color: white !important;
+}
+
+/* نموذج الدعوة */
+.invite-form {
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.invite-form .form-group {
+    margin-bottom: 15px;
+}
+
+.invite-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+.invite-form input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-family: 'Poppins', sans-serif;
+    transition: border 0.3s;
+}
+
+.invite-form input[type="email"]:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.invite-form .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.invite-form .send-invite-btn,
+.invite-form .cancel-invite-btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.invite-form .send-invite-btn {
+    background-color: #3498db;
+    color: white;
+}
+
+.invite-form .send-invite-btn:hover {
+    background-color: #2980b9;
+}
+
+.invite-form .cancel-invite-btn {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.invite-form .cancel-invite-btn:hover {
+    background-color: #c0392b;
+}
+
+/* تأثيرات إضافية */
+.invite-form {
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* تكيف مع الشاشات الصغيرة */
+@media (max-width: 768px) {
+    .invite-form {
+        padding: 15px;
+    }
+
+    .invite-form .form-actions {
+        flex-direction: column;
+    }
+
+    .invite-form .send-invite-btn,
+    .invite-form .cancel-invite-btn {
+        width: 100%;
+    }
+}
+
