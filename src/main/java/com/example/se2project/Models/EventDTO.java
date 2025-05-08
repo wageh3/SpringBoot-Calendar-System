@@ -1,4 +1,4 @@
-package com.example.se2project.Entities;
+package com.example.se2project.Models;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -11,14 +11,18 @@ public class EventDTO {
     private Integer eventstatus_id;
     private LocalTime time;
     private String title;
+    private LocalTime reminder;
 
-    public EventDTO(Integer event_id, LocalDate date, String description, Integer eventstatus_id, LocalTime time, String title) {
+
+
+    public EventDTO(Integer event_id, LocalDate date, String description, Integer eventstatus_id, LocalTime time, String title, LocalTime reminder) {
         this.event_id = event_id;
         this.date = date;
         this.description = description;
         this.eventstatus_id = eventstatus_id;
         this.time = time;
         this.title = title;
+        this.reminder = reminder;
     }
 
     public Integer getEventId() {
@@ -67,6 +71,13 @@ public class EventDTO {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+    public LocalTime getReminder() {
+        return reminder;
+    }
+
+    public void setReminder(LocalTime reminder) {
+        this.reminder = reminder;
     }
 
     @Override

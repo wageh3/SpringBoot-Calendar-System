@@ -1,6 +1,5 @@
 package com.example.se2project.User;
-import com.example.se2project.Entities.User;
-import org.springframework.http.HttpStatus;
+import com.example.se2project.Models.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;

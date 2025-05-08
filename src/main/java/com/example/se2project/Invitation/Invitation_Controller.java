@@ -1,5 +1,5 @@
 package com.example.se2project.Invitation;
-import com.example.se2project.Entities.*;
+import com.example.se2project.Models.*;
 import com.example.se2project.Event.Event_Repo;
 import com.example.se2project.User.User_Repo;
 import org.springframework.http.ResponseEntity;

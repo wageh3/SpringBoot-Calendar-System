@@ -282,9 +282,21 @@
           </div>
         </div>
 
+        <!-- NEW REMINDER INPUT -->
+        <div class="form-group">
+          <label>Reminder Before Event</label>
+          <div class="time-input-group">
+            <span>hours</span>
+            <input type="number" id="reminderHours" class="form-control" min="0" max="23" placeholder="0" value="1">
+            <span>minutes</span>
+            <input type="number" id="reminderMinutes" class="form-control" min="0" max="59" placeholder="0" value="30">
+
+          </div>
+        </div>
+
         <div class="form-group">
           <label for="eventDescription">Description</label>
-          <textarea id="eventDescription" class="form-control" rows="3" placeholder="Enter event description"></textarea>
+          <textarea id="eventDescription" class="form-control" rows="1" placeholder="Enter event description"></textarea>
         </div>
       </form>
     </div>
@@ -333,16 +345,22 @@
     const date = document.getElementById('eventDate').value;
     const time = document.getElementById('eventTime').value;
     const description = document.getElementById('eventDescription').value;
+    const reminderHours = document.getElementById('reminderHours').value || 0;
+    const reminderMinutes = document.getElementById('reminderMinutes').value || 0;
 
+// Format as HH:mm:ss (with seconds set to 00)
+    const reminder =
+            `${String(reminderHours).padStart(2, '0')}:${String(reminderMinutes).padStart(2, '0')}:00`;
     const eventData = {
       title: title,
       date: date,
       time: time,
-      description: description
+      description: description,
+      reminder: reminder
     };
 
     try {
-      const response = await fetch("http://localhost:8080/api/Add_Event", {
+      const response = await fetch("http://localhost:8081/api/Add_Event", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -373,7 +391,7 @@
   logoutBtn.addEventListener('click', async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:8080/api/logout", {
+      const response = await fetch("http://localhost:8081/api/logout", {
         method: 'POST',
         credentials: 'include',
       });

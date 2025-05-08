@@ -1,10 +1,7 @@
 package com.example.se2project.User;
-import com.example.se2project.Entities.User;
+import com.example.se2project.Models.User;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.HttpStatus;
-import java.util.Optional;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 
 @RestController

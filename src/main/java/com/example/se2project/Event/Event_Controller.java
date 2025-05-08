@@ -1,12 +1,11 @@
 package com.example.se2project.Event;
-import com.example.se2project.Entities.Event;
-import com.example.se2project.Entities.EventDTO;
-import com.example.se2project.Entities.Eventstatus;
-import com.example.se2project.Entities.User;
+import com.example.se2project.Models.Event;
+import com.example.se2project.Models.EventDTO;
+import com.example.se2project.Models.Eventstatus;
+import com.example.se2project.Models.User;
 import com.example.se2project.EventStatus.EventStatus_Repo;
 import com.example.se2project.User.User_Repo;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -37,6 +36,8 @@ public class Event_Controller {
         event.setDescription(eventsended.getDescription());
         event.setDate(eventsended.getDate());
         event.setTime(eventsended.getTime());
+        event.setReminder(eventsended.getReminder());
+
         Optional<User> user = user_repo.findById(Integer.parseInt(userId));
         event.setUser(user.get());
 

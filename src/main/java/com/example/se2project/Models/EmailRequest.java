@@ -1,4 +1,4 @@
-package com.example.se2project.Entities;
+package com.example.se2project.Models;
 
 public class EmailRequest {
     private String email;

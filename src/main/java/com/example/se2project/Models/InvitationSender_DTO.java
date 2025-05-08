@@ -1,4 +1,4 @@
-package com.example.se2project.Entities;
+package com.example.se2project.Models;
 
 public class InvitationSender_DTO {
     private String receiver_name ;

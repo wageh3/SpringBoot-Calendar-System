@@ -1,11 +1,8 @@
 package com.example.se2project.Participation;
-import com.example.se2project.Entities.*;
+import com.example.se2project.Models.*;
 import com.example.se2project.Invitation.Invitation_Repo;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")

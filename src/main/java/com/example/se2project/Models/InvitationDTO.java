@@ -1,4 +1,4 @@
-package com.example.se2project.Entities;
+package com.example.se2project.Models;
 
 public class InvitationDTO {
     private Integer invitation_id;

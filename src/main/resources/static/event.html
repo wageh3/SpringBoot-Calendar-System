@@ -70,7 +70,7 @@
     document.getElementById('usernameDisplay').textContent = username;
 
     try {
-      const response = await fetch("http://localhost:8080/api/GetAllEvents", {
+      const response = await fetch("http://localhost:8081/api/GetAllEvents", {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
@@ -121,6 +121,9 @@
                 <button class="invite-btn" data-id="${event.eventId}">
                     <i class="fas fa-user-plus"></i> Invite
                 </button>
+                 <button class="reminder-btn" data-id="${event.eventId}">
+                    <i class="fas fa-edit"></i> Add Reminder
+                </button>
             </div>
         </div>
     </div>
@@ -130,6 +133,7 @@
     setupEditForms();
     setupDeleteButton();
     setupInviteButtons();
+    setupReminderEditButtons();
 
   }
 
@@ -193,7 +197,7 @@
 
 
           try {
-            const response = await fetch(`http://localhost:8080/api/Edit_Event/${eventId}`, {
+            const response = await fetch(`http://localhost:8081/api/Edit_Event/${eventId}`, {
               method: 'PUT',
               headers: {
                 'Content-Type': 'application/json'
@@ -239,7 +243,7 @@
         }
 
         try {
-          const response = await fetch(`http://localhost:8080/api/Delete_Event/${eventId}`, {
+          const response = await fetch(`http://localhost:8081/api/Delete_Event/${eventId}`, {
             method: 'DELETE',
             credentials: 'include'
           });
@@ -294,7 +298,7 @@
             return;
           }
 
-            const response = await fetch(`http://localhost:8080/api/Add_Invitation/${eventId}`, {
+            const response = await fetch(`http://localhost:8081/api/Add_Invitation/${eventId}`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
@@ -319,6 +323,80 @@
 
         inviteForm.querySelector('.cancel-invite-btn').addEventListener('click', () => {
           eventCard.removeChild(inviteForm);
+          eventCard.querySelector('.event-card-body').style.display = 'block';
+        });
+      });
+    });
+  }
+
+  function setupReminderEditButtons() {
+    document.querySelectorAll('.reminder-btn').forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        const eventId = e.currentTarget.getAttribute('data-id');
+        const eventCard = e.currentTarget.closest('.event-card');
+
+        // Create the reminder edit form
+        const reminderForm = document.createElement('div');
+        reminderForm.classList.add('reminder-form');
+        reminderForm.innerHTML = `
+        <div class="form-group">
+          <label>Edit Reminder Time</label>
+          <div class="time-input">
+            <input type="number" class="reminder-hours" min="0" max="23" placeholder="0">
+            <span>hours</span>
+            <input type="number" class="reminder-minutes" min="0" max="59" placeholder="0">
+            <span>minutes</span>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="save-reminder-btn">Save Reminder</button>
+          <button class="cancel-reminder-btn">Cancel</button>
+        </div>
+      `;
+
+        // Hide the card body and show the form
+        eventCard.querySelector('.event-card-body').style.display = 'none';
+        eventCard.appendChild(reminderForm);
+
+        // Save Reminder Logic
+        reminderForm.querySelector('.save-reminder-btn').addEventListener('click', async () => {
+          const hours = parseInt(reminderForm.querySelector('.reminder-hours').value) || 0;
+          const minutes = parseInt(reminderForm.querySelector('.reminder-minutes').value) || 0;
+          const reminderTime = `${hours}:${minutes}`;
+
+          if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59) {
+            alert('Please enter a valid time (0-23 hours and 0-59 minutes)');
+            return;
+          }
+
+          try {
+            const response = await fetch(`http://localhost:8081/api/Update_Reminder/${eventId}`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ reminderTime }),
+              credentials: 'include'
+            });
+
+            if (response.ok) {
+              const result = await response.text();
+              if (result === "SUCCESS") {
+                alert('Reminder Updated Successfully!');
+                location.reload(); // Refresh to show changes
+              } else {
+                alert('Failed to update reminder: ' + result);
+              }
+            }
+          } catch (error) {
+            console.error('Error updating reminder:', error);
+            alert('An error occurred while updating the reminder');
+          }
+        });
+
+        // Cancel Logic
+        reminderForm.querySelector('.cancel-reminder-btn').addEventListener('click', () => {
+          eventCard.removeChild(reminderForm);
           eventCard.querySelector('.event-card-body').style.display = 'block';
         });
       });

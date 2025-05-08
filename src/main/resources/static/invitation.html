@@ -69,7 +69,7 @@
     // Function to fetch and display sent invitations
     async function loadSendedInvitations() {
         try {
-            const response = await fetch("http://localhost:8080/api/Get_All_InvitationsSended", {
+            const response = await fetch("http://localhost:8081/api/Get_All_InvitationsSended", {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
@@ -112,7 +112,7 @@
 
     async function loadReceivedInvitations() {
         try {
-            const response = await fetch("http://localhost:8080/api/Get_All_InvitationsRecevied", {
+            const response = await fetch("http://localhost:8081/api/Get_All_InvitationsRecevied", {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'

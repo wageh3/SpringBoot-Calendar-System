@@ -1,5 +1,5 @@
 package com.example.se2project.Participation;
-import com.example.se2project.Entities.Participation;
+import com.example.se2project.Models.Participation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
